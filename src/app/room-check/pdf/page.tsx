@@ -49,7 +49,7 @@ export default function RoomCheckPDF() {
                 </thead>
                 <tbody>
                     {data.detail.map(value => (
-                        <tr>
+                        <tr key={value.room_name}>
                             <td className='table-cell font-md text-left'>{value.room_name}</td>
                             <td className='table-cell text-center'>
                                 {value.light ? `\u2714` : `\u2718`}
