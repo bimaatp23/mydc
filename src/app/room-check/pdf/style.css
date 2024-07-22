@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    font-family: Calibri, sans-serif;
+}
+
+.sheet {
+    margin: 0;
+}
+
+.page {
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    page-break-after: always;
+}
+
+@media screen {
+    body {
+        background: ghostwhite;
+    }
+
+    .page {
+        background: white;
+        box-shadow: 0 .5mm 2mm rgba(0, 0, 0, .3);
+        margin: 5mm auto;
+    }
+}
+
+.sheet.A4 .page {
+    height: 210mm;
+    width: 296mm;
+}
+
+.page.custom {
+    padding: 10mm;
+}
+
+@page {
+    size: A4 landscape;
+    margin: 0;
+}
+
+@media print {
+    .MuiButtonBase-root {
+        display: none;
+    }
+
+    .sheet.A4 {
+        width: 296mm;
+    }
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table-header {
+    background-color: #f0f0f0;
+    border-bottom: 1px solid black;
+}
+
+.table-cell {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+.font-md {
+    font-weight: bold;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}

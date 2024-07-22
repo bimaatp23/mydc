@@ -5,8 +5,9 @@ import { BaseResp } from '@/types/BaseResp'
 import { Room } from '@/types/Room'
 import { RoomCheck, RoomCheckDetail } from '@/types/RoomCheck'
 import { Site } from '@/types/Site'
-import { Box, Checkbox, FormControl, MenuItem, Select, SxProps, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from '@mui/material'
+import { Box, Button, Checkbox, FormControl, MenuItem, Select, SxProps, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from '@mui/material'
 import moment from 'moment'
+import { useRouter } from 'next/navigation'
 import { ChangeEvent, useEffect, useState } from 'react'
 
 const checkboxStyles: SxProps = {
@@ -39,7 +40,8 @@ const numberTextfieldStyles: SxProps = {
     }
 }
 
-export default function Home() {
+export default function RoomCheckPage() {
+    const router = useRouter()
     const [siteList, setSiteList] = useState<Site[]>([])
     const [roomCheck, setRoomCheck] = useState<RoomCheck>({
         id: 0,
@@ -66,6 +68,19 @@ export default function Home() {
             })
         }
     }, [selectedSite])
+
+    useEffect(() => {
+        if (roomCheckDetailList) {
+            setRoomCheck({
+                ...roomCheck,
+                detail: roomCheckDetailList
+            })
+        }
+    }, [roomCheckDetailList])
+
+    useEffect(() => {
+        window.sessionStorage.setItem('room-check-data', JSON.stringify(roomCheck))
+    }, [roomCheck])
 
     const getSite = async () => {
         await fetch(`/api/site`, {
@@ -264,10 +279,24 @@ export default function Home() {
         <Box
             sx={{
                 height: '10vh',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
             }}
         >
-
+            <Box>
+                <Button
+                    variant='contained'
+                    sx={{
+                        display: 'inline'
+                    }}
+                    className='font-medium'
+                    onClick={() => router.push('room-check/pdf')}
+                >
+                    Cetak
+                </Button>
+            </Box>
         </Box>
     </Wrapper>
 }
